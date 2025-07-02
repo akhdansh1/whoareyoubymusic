@@ -10,22 +10,23 @@ function App() {
 
 
   const LogIn = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-        const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'spotify',
-        options: {
-          redirectTo: `${window.location.origin}/result`,
-          scopes: 'user-top-read user-read-private user-read-email',
-        }})
-    } catch (err) {
-      setError('An unexpected error occurred')
-      console.error('Login error:', err)
-    } finally {
-      setLoading(false)
-    }
+  try {
+    setLoading(true)
+    setError(null)
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'spotify',
+      options: {
+        redirectTo: 'https://whoareyoubymusic-nine.vercel.app/result',
+        scopes: 'user-top-read user-read-private user-read-email',
+      }
+    })
+  } catch (err) {
+    setError('An unexpected error occurred')
+    console.error('Login error:', err)
+  } finally {
+    setLoading(false)
   }
+}
 
     useEffect(() => {
         const getSession = async () => {
